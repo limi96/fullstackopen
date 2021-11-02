@@ -1,4 +1,4 @@
-#Fullstack open
+# Fullstack open
 
 Helsingin yliopiston Fullstack open -kurssin tehtäviävarten tehty repositorio.
 
