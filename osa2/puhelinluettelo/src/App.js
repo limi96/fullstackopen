@@ -1,43 +1,11 @@
-import React, { useState} from 'react'
+import React, {useState} from 'react'
+import Persons from './components/Persons'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
 
-const Persons = ({list}) => {
-  return (
-    <div>
-      {list.map(entry => <p key={entry.name}> {entry.name} {entry.number} </p> )}
-    </div>
-  )
-}
-
-const Filter = ({newFilter, handleFilterChange}) => {
-  return (
-    <div>
-      filter shown with 
-      <form > 
-        <input value = {newFilter} onChange = {handleFilterChange}/>
-      </form>
-    </div>
-  )
-}
-
-const PersonForm = ({addEntry, newName, handleNameChange, newNumber, handleNumberChange}) => {
-  return (
-    <div> 
-      <form onSubmit = {addEntry}> 
-        <div>
-          name: <input value = {newName} onChange = {handleNameChange}/>
-        </div>
-        <div>
-          Number: <input value = {newNumber} onChange = {handleNumberChange}/>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-    </div>
-  )
-}
 
 const App = () => {
+
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
     { name: 'Ada Lovelace', number: '39-44-5323523' },
@@ -46,13 +14,13 @@ const App = () => {
   ])
 
   const [newName, setNewName ] = useState('')
-
   const [newNumber, setNewNumber] = useState('')
-
   const [newFilter, setNewFilter] = useState('')
-
+  
   const namesToShow = persons
 
+
+  
   const filteredList = 
         (newFilter === null) ? namesToShow : 
                                namesToShow.filter(entry => entry?.name.toLowerCase().includes(newFilter.toLowerCase()))
