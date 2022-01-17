@@ -1,9 +1,26 @@
-const Persons = ({list}) => {
+const Persons = ({list, removeEntry}) => {
     return (
-      <div>
-        {list.map(entry => <p key={entry.name}> {entry.name} {entry.number} </p> )}
-      </div>
+      list.map(entry => {
+          return (
+            <div key={entry.name}>
+               {entry.name} {entry.number}
+          <button onClick = {() => removeEntry(entry.id, entry.name)}> delete </button>
+            </div>
+          )
+          // <Person entry = {entry} removeEntry = {removeEntry} />
+        }
+      )
     )
   }
+
+// const Person = (entry, removeEntry) => {
+//   return (
+//     <div key={entry.name}>
+//       {entry.name} {entry.number}
+//       <button> delete </button>
+//       {/* <button onClick = {removeEntry(entry.id, entry.name)}> delete </button> */}
+//     </div>
+//   )
+// }
 
 export default Persons

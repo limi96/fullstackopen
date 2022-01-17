@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
 
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 
-
+import personService from './services/PersonService'
 
 const App = () => {
 
@@ -14,16 +13,15 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
   
-  const namesToShow = persons
-
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-      })
+    personService
+    .getAll()
+    .then(initialResults => {
+      setPersons(initialResults)
+    })
   }, [])
 
+  const namesToShow = persons
   
   const filteredList = 
         (newFilter === null) ? namesToShow : 
@@ -41,9 +39,25 @@ const App = () => {
           number: newNumber,
           id: persons.length +1
         }
+        personService.create(entryObject)
         setPersons(persons.concat(entryObject))
         setNewName('')
       }            
+  }
+
+  const removeEntry = (id, name) => {
+      
+    var confirmDelete = false
+    confirmDelete = window.confirm(`Confirm deletion of ${name}?`)
+
+    if (confirmDelete) {
+      personService.deletePerson(id)
+        .then(() => {
+        const tempPersons = persons.filter(person => person.id !== id)
+        setPersons(tempPersons)
+        })
+    }
+
   }
 
   const handleNumberChange =(event) => {setNewNumber(event.target.value)}
@@ -61,7 +75,7 @@ const App = () => {
         newNumber = {newNumber} handleNumberChange = {handleNumberChange}/>
 
       <h2>Numbers</h2>
-      <Persons list = {filteredList} />         
+      <Persons list = {filteredList} removeEntry = {removeEntry} />         
 
     </div>
   )
