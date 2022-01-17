@@ -7,7 +7,7 @@ const CountryDetails = ({country}) => {
           {country.name.common}
         </h1>
         Capital: {country.capital} <br></br>
-        Area: {country.area}
+        Area: {country.area}    
   
         <h2>
           Languages: 
