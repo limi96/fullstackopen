@@ -23,5 +23,4 @@ const changeNumber = newObject => {
     return request.then(response => response.data)
 }
 
-
 export default {getAll, create, deletePerson, changeNumber}
