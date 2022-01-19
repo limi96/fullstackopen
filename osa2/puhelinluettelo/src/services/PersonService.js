@@ -8,7 +8,8 @@ const getAll = () => {
 }
 
 const create = newObject => {
-    return axios.post(baseURL, newObject)
+    const request = axios.post(baseURL, newObject)
+    return request.then(response => response.data)
 }
 
 const deletePerson = personId => {
@@ -16,4 +17,11 @@ const deletePerson = personId => {
     return axios.delete(deleteURL)
 }
 
-export default {getAll, create, deletePerson}
+const changeNumber = newObject => {
+    const updateURL = baseURL.concat("/" + newObject.id)
+    const request = axios.put(updateURL, newObject)
+    return request.then(response => response.data)
+}
+
+
+export default {getAll, create, deletePerson, changeNumber}
